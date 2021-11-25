@@ -17,15 +17,17 @@ public class Player implements CharacterInterface {
   private String skill;
   private int rayaatk;
   private int pos = 20;
-  AccessoriesInterface[] equipment = new AccessoriesInterface[4];
+  AccessoriesInterface[] equipment = new AccessoriesInterface[4]; //slot อุปกรณ์ง่ายๆ 4ชิ้น
 
   public Player(
-    WeaponInterface weapon,
+    //ข้อมูลตอนสร้างตัว
     String race,
     job job,
     String name,
     int hp,
     int mana,
+    //อุปกรณ์ตอนสร้างตัว
+    WeaponInterface weapon,
     ArmoInterface cloth,
     ArmoInterface boots,
     ArmoInterface helmet
@@ -37,7 +39,7 @@ public class Player implements CharacterInterface {
     this.mana = mana;
     this.skill = job.skill();
     this.rayaatk = job.rayaatk();
-    if (job.getClass().getClass().getSimpleName().equals("fighter")) {
+    if (job.getClass().getClass().getSimpleName().equals("fighter")) { //ไฟท์เตอร์ไม่มีอาวุธแต่stat_op
       this.hp += 100;
       this.atk += 100;
     } else {
@@ -47,7 +49,7 @@ public class Player implements CharacterInterface {
     equipment[2] = cloth;
     equipment[3] = boots;
     this.atk += equipment[0].damage();
-    for (int i = 1; i < 4; i++) {
+    for (int i = 1; i < 4; i++) { //loopบวกค่าdeff
       this.def += equipment[i].defense();
     }
   }
@@ -88,9 +90,9 @@ public class Player implements CharacterInterface {
 
   @Override
   public void equip(AccessoriesInterface ac) {
-    String acname = ac.getClass().getSimpleName();
+    String acname = ac.getClass().getSimpleName(); //เอาชื่ออุปกรณ์ที่ใส่
     int idx;
-    switch (acname) {
+    switch (acname) { //แต่ละอุปกรณ์มีslotของตัวเอง
       case "boots":
         idx = 3;
         break;
@@ -104,11 +106,11 @@ public class Player implements CharacterInterface {
         idx = 0;
         break;
     }
-    if (equipment[idx].getClass().getSimpleName().equals("empty")) {
+    if (equipment[idx].getClass().getSimpleName().equals("empty")) { //เช็คว่าอุปกรณ์ว่างไหม
       if (idx == 0 && this.job() != "fighter") {
-        atk += ac.damage();
-        equipment[0] = ac;
-      } else {
+        atk += ac.damage(); //เพิ่มดาเมจ
+        equipment[0] = ac; //ใส่อาวุธ
+      } else { //ใส่ป้องกัน
         def += ac.defense();
         if (idx == 1) {
           equipment[1] = ac;
@@ -121,7 +123,7 @@ public class Player implements CharacterInterface {
       System.out.println(
         "Equipped: " + equipment[idx].getClass().getSimpleName()
       );
-    } else {
+    } else { 
       System.out.println(
         "You can't Equipped anymore: " +
         equipment[idx].getClass().getSimpleName()
@@ -171,12 +173,12 @@ public class Player implements CharacterInterface {
 
   @Override
   public void Acttack(Player enemy) {
-    if (canattack(enemy)) {
+    if (canattack(enemy)) { //เช็คระยะโจมตีก่อน
       System.out.println(this.name() + " " + skill + " " + enemy.name());
-      int dam = enemy.hitted(this);
+      int dam = enemy.hitted(this); //คำนวนดาเมจ
       System.out.println("Enemy recive " + dam);
     } else {
-      System.out.println("YOu too far from your enemy: " + enemy.name);
+      System.out.println("YOu too far from your enemy: " + enemy.name); //ไกลเกินตีไม่ถึง
     }
   }
 

@@ -24,10 +24,11 @@ public class LAB05 {//forinteraction
         job necromancer=new necromancer();
         //ผู้เล่น
         Player[] player=new Player[2];
-        player[0] = new Player(sw, "human",warrior, "นักดาบจ้า", 100, 100, c,b, h);
-        player[1] = new Player(sf, "human",necromancer, "นักเวทย์เว้ย", 100, 100, c,b, h);
+        player[0] = new Player( "human",warrior, "Warrior", 100, 100, sw,c,b, h);
+        player[1] = new Player( "human",necromancer, "Magician", 100, 100,sf, c,b, h);
         //interation
         player[1].talk(); 
+        player[1].equipment();
         player[1].statuswindow();
         player[1].Unequipped(sf);
         player[1].Unequipped(sf);
