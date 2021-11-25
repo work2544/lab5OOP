@@ -87,22 +87,33 @@ public interface CharacterInterface {
 
   /**
    * สวมใส่ accessory
-   *
+   * effects: เปลี่ยนแปลง atk และ def
    * @param ac อุปกรณ์ที่จะสวมใส่
    */
   void equip(AccessoriesInterface ac);
 
   /**
    * ถอด accessory
-   *
+   * effects: เปลี่ยนแปลง atk และ def
    * @param ac
    */
   void Unequipped(AccessoriesInterface ac);
-
+  /**
+   * 
+   * 
+   * @param player
+   */
   void Acttack(Player player);
-
+/**
+ * calculate damage received
+ * effects: hpของคนเรียกใช้ลดลง
+ * @param player who Acttack
+ * @return damage received
+ */
   int hitted(Player player);
-
+/**
+ * show player status
+ */
   default void statuswindow() {
     System.out.println();
     System.out.println("-----------" + this.name() + "------------");
